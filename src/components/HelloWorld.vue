@@ -22,19 +22,15 @@ export default {
   },
   methods: {
     apiPublic: async function() {
-      console.log(localStorage.getItem('jwt'))
       let res = await axios.get('http://localhost:8083/api/guests/public')
       this.msg = res.data
     },
-    // apiPrivate: async function() {
-    //   let res = await axios.get('http://localhost:8083/api/referrer/private')
-    //   this.msg = res.data
-    // },
     apiPrivate: async function () {
-    let res = await axios.get('http://localhost:8083/api/referrer/private', {
-    headers: {'Authorization': `Bearer ${localStorage.getItem('jwt')}`}
+      let res = await axios.get('http://localhost:8083/api/referrer/private', {
+      headers: {'Authorization': `Bearer ${localStorage.getItem('jwt')}`}
     })
-
+    
+    
     console.log(localStorage.getItem('jwt'))
     this.msg = res.data
     },

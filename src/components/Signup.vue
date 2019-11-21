@@ -13,6 +13,7 @@
 
 <script>
 import firebase from 'firebase'
+import axios from 'axios'
 
 export default {
   name: 'Signup',
@@ -30,6 +31,20 @@ export default {
           res => {
             res.user.getIdToken().then(idToken => {
               localStorage.setItem('jwt', idToken.toString())
+            })
+            axios({
+              method: 'post',
+              url: 'http://localhost:8083/api/users',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              data: {
+                referrer: {
+                  uid: res.user.uid,
+                  username: res.user.displayName,
+                  email: res.user.email
+                }
+              }
             })
             this.$router.push('/')
           },
