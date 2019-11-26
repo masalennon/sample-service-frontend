@@ -22,17 +22,14 @@ export default {
   },
   methods: {
     apiPublic: async function() {
-      let res = await axios.get('http://localhost:8083/api/guests/public')
+      let res = await axios.get('http://localhost:8083/api/users/public')
       this.msg = res.data
     },
     apiPrivate: async function () {
       let res = await axios.get('http://localhost:8083/api/referrer/private', {
       headers: {'Authorization': `Bearer ${localStorage.getItem('jwt')}`}
     })
-    
-    
-    console.log(localStorage.getItem('jwt'))
-    this.msg = res.data
+      this.msg = res.data
     },
     signOut: function () {
       firebase.auth().signOut().then(() => {
